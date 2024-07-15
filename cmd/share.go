@@ -26,7 +26,7 @@ var (
 				return
 			}
 			// if the file exists serve the file
-			server.Serve(file_path, false, false)
+			server.Serve(file_path, false)
 		},
 	}
 )

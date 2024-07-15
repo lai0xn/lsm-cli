@@ -18,7 +18,6 @@ import (
 type FileServer struct {
 	path   string
 	upload bool
-	is_dir bool
 }
 
 func (s *FileServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -27,17 +26,13 @@ func (s *FileServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	name := filepath.Clean(s.path)
-	if s.is_dir == false {
-		fileHandler(w, r, s.path, name)
-		return
-	}
+	fileHandler(w, r, s.path, name)
 }
 
-func NewFileServer(file_path string, is_dir bool, upload bool) *FileServer {
+func NewFileServer(file_path string, upload bool) *FileServer {
 	return &FileServer{
 		path:   file_path,
 		upload: upload,
-		is_dir: is_dir,
 	}
 }
 
@@ -102,8 +97,8 @@ func uploadHandler(w http.ResponseWriter, r *http.Request, path string) {
 	}
 }
 
-func Serve(file_path string, is_dir bool, upload bool) {
-	s := NewFileServer(file_path, is_dir, upload)
+func Serve(file_path string, upload bool) {
+	s := NewFileServer(file_path, upload)
 	ip := fmt.Sprintf("http://%s:8080", utils.GetIP())
 
 	qrc, _ := qrcode.New(ip)

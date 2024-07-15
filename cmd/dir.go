@@ -24,7 +24,7 @@ var dirCmd = &cobra.Command{
 			log.Fatal(err.Error())
 			return
 		}
-		server.Serve("./out/output.zip", false, false)
+		server.Serve("./out/output.zip", false)
 	},
 }
 

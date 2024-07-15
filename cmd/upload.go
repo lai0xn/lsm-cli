@@ -16,7 +16,7 @@ var uploadCmd = &cobra.Command{
 	Short: "receive files from another device",
 	Long:  "this command allows you to receive files from a different device",
 	Run: func(cmd *cobra.Command, args []string) {
-		server.Serve(path, false, true)
+		server.Serve(path, true)
 	},
 }
 
